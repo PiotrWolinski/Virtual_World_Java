@@ -1,14 +1,14 @@
-package Organisms.Animals;
+package World.Organisms.Animals;
 
-import Organisms.Organism;
+import World.Organisms.Organism;
+import World.World;
 
 import java.util.Random;
 
-class World{};
-
-public abstract class Animal extends Organism {
+public class Animal extends Organism {
 
     public void Action() {
+        this.age++;
         boolean moved = false;
         Random direction = new Random();
 
@@ -31,13 +31,25 @@ public abstract class Animal extends Organism {
                 moved = true;
             }
 
-            //tutaj kolizja
+            if (!world.CheckIfFieldIsEmpty(this.Y, this.X)) {
+                world.ReturnOrganismFrom(this.Y, this.X).Collision(this);
+            }
         }
     }
 
     public void Collision(Organism attacker) {
-        if (!attacker.getClass().equals(attacker.getClass())) {
-            
+        if (!this.getClass().equals(attacker.getClass())) {
+            if (this.getStrength() <= attacker.getStrength()) {
+                this.setAlive(false);
+            } else {
+                attacker.setAlive(false);
+            }
+        } else {
+            //rozmnazando
         }
+    }
+
+    public void Draw() {
+
     }
 }

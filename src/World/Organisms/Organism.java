@@ -1,14 +1,18 @@
-package Organisms;
+package World.Organisms;
+
+import World.World;
 
 public abstract class Organism {
     protected int strength;
     protected int initiative;
+    protected int age;
     protected int X;
     protected int Y;
     protected int lastX;
     protected int lastY;
     protected boolean alive;
     protected boolean propagated;
+    protected World world;
 
     public int getStrength() {
         return strength;
@@ -67,10 +71,10 @@ public abstract class Organism {
     }
 
 
-    abstract void Action();
+    abstract public void Action();
 
-    abstract void Collision(Organism attacker);
+    abstract public void Collision(Organism attacker);
 
-    abstract void Draw();
+    abstract public void Draw();
 
 }
