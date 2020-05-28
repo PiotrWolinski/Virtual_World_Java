@@ -1,5 +1,7 @@
 package World;
 
+import java.awt.*;
+import java.awt.color.ColorSpace;
 import java.util.HashSet;
 import java.util.Vector;
 import World.Organisms.*;
@@ -46,9 +48,7 @@ public class World {
         this.field = new Organism[sizeY][sizeX];
     }
 
-    public final boolean CheckIfFieldIsEmpty(final int Y, final int X) {
-        return field[Y][X] == null;
-    }
+    public final boolean CheckIfFieldIsEmpty(final int Y, final int X) { return field[Y][X] == null; }
 
     public final Organism ReturnOrganismFrom(final int Y, final int X) {
         return field[Y][X];
@@ -63,12 +63,27 @@ public class World {
     }
 
     public void Print() {
-        JFrame frame = new JFrame();
+        /*JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //frame.setLayout(new GridLayout(1,1,0,0));
         frame.setSize(800, 600);
+        frame.setTitle("180297 - Piotr Wolinski");
 
-        frame.setVisible(true);
+        JButton button = new JButton("Przycisk");
+        frame.add(button);
+        frame.setLayout(null);
+        button.setBounds(100, 100, 200, 50);
+
+        Box box = new Box(BoxLayout.LINE_AXIS);
+        box.setBackground(new Color(128, 128, 255));
+        box.setBounds(50, 50, 100, 100);
+        frame.add(box);
+
+        frame.setVisible(true);*/
+
+        
+
+
     }
 
 

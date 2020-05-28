@@ -67,12 +67,7 @@ public abstract class Plant extends Organism {
     }
 
     public void Collision(Organism attacker) {
-        if (attacker.getStrength() >= this.getStrength()) {
-            this.alive = false;
-        }
-	    else {
-            attacker.setAlive(false);
-        }
+        this.alive = false;
     }
 
     public void Draw() {
