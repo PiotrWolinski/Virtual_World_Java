@@ -1,9 +1,10 @@
 package World;
 
 import java.awt.*;
-import java.awt.color.ColorSpace;
-import java.util.HashSet;
 import java.util.Vector;
+
+import ConstValues.Colors;
+import View.*;
 import World.Organisms.*;
 
 import javax.swing.*;
@@ -63,23 +64,29 @@ public class World {
     }
 
     public void Print() {
-        /*JFrame frame = new JFrame();
+        JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //frame.setLayout(new GridLayout(1,1,0,0));
         frame.setSize(800, 600);
         frame.setTitle("180297 - Piotr Wolinski");
 
-        JButton button = new JButton("Przycisk");
-        frame.add(button);
-        frame.setLayout(null);
-        button.setBounds(100, 100, 200, 50);
+        //JButton button = new Cell(0, 0, Colors.WILK.getColor());
+        //JButton button1 = new Cell(20, 0, Colors.WILCZE_JAGODY.getColor());
+        //frame.add(button);
+       //frame.add(button1);
+       frame.setLayout(new GridLayout());
 
-        Box box = new Box(BoxLayout.LINE_AXIS);
-        box.setBackground(new Color(128, 128, 255));
-        box.setBounds(50, 50, 100, 100);
-        frame.add(box);
 
-        frame.setVisible(true);*/
+        Cell button2 = new Cell(Colors.GUARANA.getColor());
+
+        JPanel panel = new JPanel();
+        panel.add(button2);
+        frame.add(panel, Component.CENTER_ALIGNMENT);
+
+
+
+
+        frame.setVisible(true);
 
         
 

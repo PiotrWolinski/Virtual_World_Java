@@ -1,5 +1,6 @@
 package World.Organisms.Animals;
 
+import ConstValues.Colors;
 import World.Organisms.Organism;
 
 public class Zolw extends Animal {
@@ -11,6 +12,7 @@ public class Zolw extends Animal {
         this.age = 1;
         this.alive = true;
         this.propagated = false;
+        this.color = Colors.ZOLW.getColor();
 
         this.setLastX(this.X);
         this.setLastY(this.Y);

@@ -1,5 +1,7 @@
 package World.Organisms.Animals;
 
+import ConstValues.Colors;
+
 public class Lis extends Animal {
     public Lis(final int Y, final int X) {
         this.Y = Y;
@@ -9,6 +11,7 @@ public class Lis extends Animal {
         this.age = 1;
         this.alive = true;
         this.propagated = false;
+        this.color = Colors.LIS.getColor();
 
         this.setLastX(this.X);
         this.setLastY(this.Y);

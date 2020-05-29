@@ -1,5 +1,6 @@
 package World.Organisms.Animals;
 
+import ConstValues.Colors;
 import World.Organisms.Organism;
 
 public class Antylopa extends Animal {
@@ -11,6 +12,7 @@ public class Antylopa extends Animal {
         this.age = 1;
         this.alive = true;
         this.propagated = false;
+        this.color = Colors.ANTYLOPA.getColor();
 
         this.setLastX(this.X);
         this.setLastY(this.Y);

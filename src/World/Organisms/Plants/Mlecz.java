@@ -1,5 +1,7 @@
 package World.Organisms.Plants;
 
+import ConstValues.Colors;
+
 public class Mlecz extends Plant {
     public Mlecz(final int Y, final int X) {
         this.Y = Y;
@@ -9,6 +11,7 @@ public class Mlecz extends Plant {
         this.age = 1;
         this.alive = true;
         this.propagated = false;
+        this.color = Colors.MLECZ.getColor();
     }
 
     public void Action() {

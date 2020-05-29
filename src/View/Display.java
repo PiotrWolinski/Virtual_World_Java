@@ -1,3 +1,5 @@
+package View;
+
 import java.awt.*;
 import java.awt.color.ColorSpace;
 import java.util.HashSet;

@@ -2,6 +2,8 @@ package World.Organisms;
 
 import World.World;
 
+import java.awt.*;
+
 public abstract class Organism {
     protected int strength;
     protected int initiative;
@@ -13,6 +15,7 @@ public abstract class Organism {
     protected boolean alive;
     protected boolean propagated;
     protected World world;
+    protected Color color;
 
     public int getStrength() {
         return strength;
@@ -70,6 +73,7 @@ public abstract class Organism {
         this.propagated = propagated;
     }
 
+    public Color getColor() { return color; }
 
     abstract public void Action();
 

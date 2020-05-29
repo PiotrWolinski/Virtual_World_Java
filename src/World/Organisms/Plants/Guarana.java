@@ -1,5 +1,6 @@
 package World.Organisms.Plants;
 
+import ConstValues.Colors;
 import World.Organisms.Organism;
 
 public class Guarana extends Plant {
@@ -11,6 +12,7 @@ public class Guarana extends Plant {
         this.age = 1;
         this.alive = true;
         this.propagated = false;
+        this.color = Colors.GUARANA.getColor();
     }
 
     public void Collision(Organism attacker) {
