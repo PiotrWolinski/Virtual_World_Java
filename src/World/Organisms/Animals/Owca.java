@@ -1,11 +1,11 @@
 package World.Organisms.Animals;
 
 import ConstValues.Colors;
+import World.World;
 
 public class Owca extends Animal {
-    public Owca(final int Y, final int X) {
-        this.Y = Y;
-        this.X = X;
+    public Owca(final int Y, final int X, World world) {
+        super(Y, X, world);
         this.strength = 4;
         this.initiative = 4;
         this.age = 1;

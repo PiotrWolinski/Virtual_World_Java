@@ -73,7 +73,13 @@ public abstract class Organism {
         this.propagated = propagated;
     }
 
+    public int getAge() { return age; }
+
+    public void setAge(int age) { this.age = age; }
+
     public Color getColor() { return color; }
+
+    public int getInitiative() { return initiative; }
 
     abstract public void Action();
 

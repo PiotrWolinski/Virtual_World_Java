@@ -3,8 +3,15 @@ package World.Organisms.Plants;
 import java.util.Random;
 
 import World.Organisms.Organism;
+import World.World;
 
 public abstract class Plant extends Organism {
+
+    public Plant(final int Y, final int X, World world) {
+        this.Y = Y;
+        this.X = X;
+        this.world = world;
+    }
 
     public void Action() {
         this.age++;
@@ -22,7 +29,7 @@ public abstract class Plant extends Organism {
 
             do {
                 if (dir == 0) {
-                    if (this.Y > 0 && this.world.CheckIfFieldIsEmpty(this.Y - 1, this.X)) {									// sprawdzam gore
+                    if (this.Y > 0 && this.world.checkIfFieldIsEmpty(this.Y - 1, this.X)) {									// sprawdzam gore
                         newY--;
                         propagated = true;
                     }
@@ -31,7 +38,7 @@ public abstract class Plant extends Organism {
                     }
                 }
                 else if (dir == 1) {
-                    if (this.X < this.world.getSizeX() - 1 && this.world.CheckIfFieldIsEmpty(this.Y, this.X + 1)) {		// sprawdzam prawo
+                    if (this.X < this.world.getSizeX() - 1 && this.world.checkIfFieldIsEmpty(this.Y, this.X + 1)) {		// sprawdzam prawo
                         newX++;
                         propagated = true;
                     }
@@ -41,7 +48,7 @@ public abstract class Plant extends Organism {
                 }
                 else if (dir == 2) {
 
-                    if (this.Y < this.world.getSizeY() - 1 && this.world.CheckIfFieldIsEmpty(this.Y + 1, this.X)) {		// sprawdzam dol
+                    if (this.Y < this.world.getSizeY() - 1 && this.world.checkIfFieldIsEmpty(this.Y + 1, this.X)) {		// sprawdzam dol
                         newY++;
                         propagated = true;
                     }
@@ -50,7 +57,7 @@ public abstract class Plant extends Organism {
                     }
                 }
                 else if (dir == 3) {
-                    if (this.X > 0 && this.world.CheckIfFieldIsEmpty(this.Y, this.X - 1)) {                                    // sprawdzam lewo
+                    if (this.X > 0 && this.world.checkIfFieldIsEmpty(this.Y, this.X - 1)) {                                    // sprawdzam lewo
                         newX--;
                         propagated = true;
                     } else {

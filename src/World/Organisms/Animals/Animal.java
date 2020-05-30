@@ -7,6 +7,12 @@ import java.util.Random;
 
 public class Animal extends Organism {
 
+    public Animal(final int Y, final int X, World world) {
+        this.Y = Y;
+        this.X = X;
+        this.world = world;
+    }
+
     public void Action() {
         this.age++;
         boolean moved = false;
@@ -16,36 +22,70 @@ public class Animal extends Organism {
         lastY = Y;
 
         while (!moved) {
-            int newDirection = direction.nextInt(4) ;
+            int newDirection = direction.nextInt(4);
             if (newDirection == 0 && this.Y > 0) {
                 this.Y--;
                 moved = true;
-            } else if (newDirection == 1 /* && this.X < */) {
+            } else if (newDirection == 1 && this.X < this.world.getSizeX() - 1) {
                 this.X++;
                 moved = true;
-            } else if (newDirection == 2 /* && this.Y <*/ ) {
+            } else if (newDirection == 2 && this.Y < this.world.getSizeY() - 1  ) {
                 this.Y++;
                 moved = true;
             } else if (newDirection == 3 && this.X > 0) {
                 this.X--;
                 moved = true;
             }
+        }
 
-            if (!world.CheckIfFieldIsEmpty(this.Y, this.X)) {
-                world.ReturnOrganismFrom(this.Y, this.X).Collision(this);
-            }
+        if (!world.checkIfFieldIsEmpty(this.Y, this.X)) {
+            world.returnOrganismFrom(this.Y, this.X).Collision(this);
         }
     }
 
     public void Collision(Organism attacker) {
-        if (!this.getClass().equals(attacker.getClass())) {
+        if (!attacker.getClass().equals(this.getClass())) {
             if (this.getStrength() <= attacker.getStrength()) {
                 this.setAlive(false);
             } else {
                 attacker.setAlive(false);
             }
         } else {
-            //rozmnazando
+            makeDescendant(attacker);
+        }
+    }
+
+    public void makeDescendant(Organism org) {
+        if (!this.propagated && !org.isPropagated() && this.getAge() > 5 && org.getAge() > 5) {
+            boolean done = false;
+
+            int newX = this.X;
+            int newY = this.Y;
+
+            if (this.Y > 0 && this.world.checkIfFieldIsEmpty(this.Y - 1, this.X)) {
+                newY--;
+                done = true;
+            } else if (this.X < this.world.getSizeX() - 1 && this.world.checkIfFieldIsEmpty(this.Y, this.X + 1)) {
+                newX++;
+                done = true;
+            } else if (this.Y < this.world.getSizeY() - 1 && this.world.checkIfFieldIsEmpty(this.Y + 1, this.X)) {
+                newY++;
+                done = true;
+            } else if (this.X > 0 && this.world.checkIfFieldIsEmpty(this.Y, this.X - 1)) {
+                newX--;
+                done = true;
+            }
+
+            if (done) {
+                //dodaje zwierze na pole
+            } else {
+                //dodaje stosowny komentarz
+            }
+
+            this.setPropagated(true);
+            org.setPropagated(true);
+        } else {
+            //stosowny komentarz, ze zwierzeta sie nie rozmnozyly
         }
     }
 
