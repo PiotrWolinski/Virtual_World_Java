@@ -36,24 +36,22 @@ public class Zolw extends Animal {
 
     public void Collision(Organism attacker) {
         if (!attacker.getClass().equals(this.getClass())) {
-            if (this.getStrength() > attacker.getStrength()) {
+            if (attacker.getStrength() < 5) {
+                attacker.setX(attacker.getLastX());
+                attacker.setY(attacker.getLastY());
+
+                this.world.getCommentator().turtleDefended(this, attacker);
+            } else if (this.getStrength() > attacker.getStrength()) {
                 attacker.setAlive(false);
+
+                this.world.getCommentator().commentKill(this, attacker);
             } else {
-                attacker.setAlive(false);
+                this.setAlive(false);
+
+                this.world.getCommentator().commentKill(attacker, this);
             }
-        } else if (attacker.getStrength() < 5) {
-            attacker.setX(attacker.getLastX());
-            attacker.setY(attacker.getLastY());
-
-            //komentarz
-        } else if (attacker.getStrength() >= 5) {
-            this.setAlive(false);
-
-            //dodam komentarz
-        }
-        else {
+        } else {
             makeDescendant(attacker);
-            //dodam komentarz
         }
     }
 }

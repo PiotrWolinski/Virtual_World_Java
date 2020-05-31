@@ -16,6 +16,7 @@ public class World {
     private ArrayList<Organism> plants;
     private Random generator;
     private Czlowiek czlowiek;
+    private Commentator commentator;
 
     public int getSizeX() {
         return sizeX;
@@ -44,6 +45,7 @@ public class World {
         field = new Organism[sizeY][sizeX];
         animals = new ArrayList<Organism>();
         plants = new ArrayList<Organism>();
+        commentator = new Commentator();
 
         initField();
 
@@ -66,6 +68,76 @@ public class World {
             return this.field[Y][X].getStrength();
         } else {
             return 0;
+        }
+    }
+
+    public Commentator getCommentator() {
+        return commentator;
+    }
+
+    public void addAnimal(String parent, final int newX, final int newY) {
+        Organism org = null;
+
+        switch (parent) {
+            case "Wilk": {
+                org = new Wilk(newY, newX, this);
+                break;
+            }
+            case "Owca": {
+                org = new Owca(newY, newX, this);
+                break;
+            }
+            case "Lis": {
+                org = new Lis(newY, newX, this);
+                break;
+            }
+            case "Zolw": {
+                org = new Zolw(newY, newX, this);
+                break;
+            }
+            case "Antylopa": {
+                org = new Antylopa(newY, newX, this);
+                break;
+            }
+        }
+
+        if (org != null) {
+            org.setPropagated(true);
+            animals.add(org);
+            sortAnimals();
+        }
+    }
+
+    public void addPlant(String parent, final int newX, final int newY) {
+        Organism org = null;
+
+        switch (parent) {
+            case "Trawa": {
+                org = new Trawa(newY, newX, this);
+                break;
+            }
+            case "Mlecz": {
+                org = new Mlecz(newY, newX, this);
+                break;
+            }
+            case "Guarana": {
+                org = new Guarana(newY, newX, this);
+                break;
+            }
+            case "WilczeJagody": {
+                org = new WilczeJagody(newY, newX, this);
+                break;
+            }
+            case "BarszczSosnowskiego": {
+                org = new BarszczSosnowskiego(newY, newX, this);
+                break;
+            }
+        }
+
+        if (org != null) {
+            org.setPropagated(true);
+            plants.add(org);
+            sortPlants();
         }
     }
 
@@ -119,14 +191,6 @@ public class World {
     }
 
     public void simulate() {
-
-    }
-
-    public void addAnimal() {
-
-    }
-
-    public void addPlant() {
 
     }
 
@@ -200,29 +264,35 @@ public class World {
                         }
                         case 5:
                         {
-                            field[i][j] = new Trawa(i, j, this);
-                            plants.add(field[i][j]);
+                            field[i][j] = new CyberOwca(i, j, this);
+                            animals.add(field[i][j]);
                             break;
                         }
                         case 6:
                         {
-                            field[i][j] = new Mlecz(i, j, this);
+                            field[i][j] = new Trawa(i, j, this);
                             plants.add(field[i][j]);
                             break;
                         }
                         case 7:
                         {
-                            field[i][j] = new Guarana(i, j, this);
+                            field[i][j] = new Mlecz(i, j, this);
                             plants.add(field[i][j]);
                             break;
                         }
                         case 8:
                         {
-                            field[i][j] = new WilczeJagody(i, j, this);
+                            field[i][j] = new Guarana(i, j, this);
                             plants.add(field[i][j]);
                             break;
                         }
                         case 9:
+                        {
+                            field[i][j] = new WilczeJagody(i, j, this);
+                            plants.add(field[i][j]);
+                            break;
+                        }
+                        case 10:
                         {
                             field[i][j] = new BarszczSosnowskiego(i, j, this);
                             plants.add(field[i][j]);

@@ -77,17 +77,15 @@ public class Antylopa extends Animal {
 
         if (this.getClass().equals(attacker.getClass())) {
             makeDescendant(attacker);
-
-            //stosowny komenatarz
         } else if (!run) {
             if (this.getStrength() <= attacker.getStrength()) {
-                this.alive = false;
+                this.setAlive(false);
 
-                // komentarz
+                this.world.getCommentator().commentKill(attacker, this);
             } else {
                 attacker.setAlive(false);
 
-                // komentarz
+                this.world.getCommentator().commentKill( this, attacker);
             }
         } else {
             boolean moved = false;
@@ -135,14 +133,14 @@ public class Antylopa extends Animal {
                 if (this.getStrength() <= attacker.getStrength()) {
                     this.alive = false;
 
-                    // komentarz
+                    this.world.getCommentator().commentKill(attacker, this);
                 } else {
                     attacker.setAlive(false);
 
-                    // komentarz
+                    this.world.getCommentator().commentKill( this, attacker);
                 }
             } else {
-                // komentarz, ze nie dogonil antylopy
+                this.world.getCommentator().commentAntylopaUciekla(this, attacker, this.getX(), this.getY());
             }
         }
     }

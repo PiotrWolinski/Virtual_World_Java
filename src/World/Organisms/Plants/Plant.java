@@ -68,13 +68,23 @@ public abstract class Plant extends Organism {
             } while (!propagated && bound != dir);
 
             if (propagated && !this.propagated) {
-                //adding new plant to the field
+                this.world.addPlant(this.getClass().getName(), newX, newY);
+
+                this.world.getCommentator().commentSuccPropagation(this, newX, newY);
             }
         }
     }
 
     public void Collision(Organism attacker) {
-        this.alive = false;
+        if (this.getStrength() <= attacker.getStrength()) {
+            this.setAlive(false);
+
+            this.world.getCommentator().commentKill(attacker, this);
+        } else {
+            attacker.setAlive(false);
+
+            this.world.getCommentator().commentKill( this, attacker);
+        }
     }
 
     public void Draw() {

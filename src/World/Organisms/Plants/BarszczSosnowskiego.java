@@ -17,9 +17,44 @@ public class BarszczSosnowskiego extends Plant{
 
     public void Action() {
 
+        if (this.Y > 0) {
+            if (!this.world.checkIfFieldIsEmpty(this.Y - 1, this.X) &&
+                    this.world.returnOrganismFrom(this.Y - 1, this.X).getInitiative() != 0) {
+                this.world.returnOrganismFrom(this.Y - 1, this.X).setAlive(false);
+                this.world.getCommentator().commentKill(this, this.world.returnOrganismFrom(this.Y - 1, this.X));
+            }
+        }
+        if (this.X < this.world.getSizeX() - 1) {
+            if (!this.world.checkIfFieldIsEmpty(this.Y, this.X + 1) &&
+                    this.world.returnOrganismFrom(this.Y, this.X + 1).getInitiative() != 0) {
+                this.world.returnOrganismFrom(this.Y, this.X + 1).setAlive(false);
+                this.world.getCommentator().commentKill(this, this.world.returnOrganismFrom(this.Y, this.X + 1));
+            }
+        }
+        if (this.Y < this.world.getSizeY() - 1) {
+            if (!this.world.checkIfFieldIsEmpty(this.Y + 1, this.X) &&
+                    this.world.returnOrganismFrom(this.Y + 1, this.X).getInitiative() != 0) {
+                this.world.returnOrganismFrom(this.Y + 1, this.X).setAlive(false);
+                this.world.getCommentator().commentKill(this, this.world.returnOrganismFrom(this.Y + 1, this.X));
+            }
+        }
+        if (this.X > 0) {
+            if (!this.world.checkIfFieldIsEmpty(this.Y, this.X - 1) &&
+                    this.world.returnOrganismFrom(this.Y, this.X - 1).getInitiative() != 0) {
+                this.world.returnOrganismFrom(this.Y, this.X - 1).setAlive(false);
+                this.world.getCommentator().commentKill(this, this.world.returnOrganismFrom(this.Y, this.X - 1));
+            }
+        }
+
+        this.world.updateField();
+
+        super.Action();
     }
 
     public void Collision(Organism attacker) {
 
+        attacker.setAlive(false);
+
+        this.world.getCommentator().commentKill(this, attacker);
     }
 }

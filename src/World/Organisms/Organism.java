@@ -87,4 +87,6 @@ public abstract class Organism {
 
     abstract public void Draw();
 
+    @Override
+    public String toString() { return this.getClass().getName(); }
 }

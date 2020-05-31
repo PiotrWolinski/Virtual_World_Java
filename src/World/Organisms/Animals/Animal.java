@@ -47,8 +47,12 @@ public class Animal extends Organism {
         if (!attacker.getClass().equals(this.getClass())) {
             if (this.getStrength() <= attacker.getStrength()) {
                 this.setAlive(false);
+
+                this.world.getCommentator().commentKill(attacker, this);
             } else {
                 attacker.setAlive(false);
+
+                this.world.getCommentator().commentKill( this, attacker);
             }
         } else {
             makeDescendant(attacker);
@@ -77,15 +81,18 @@ public class Animal extends Organism {
             }
 
             if (done) {
-                //dodaje zwierze na pole
+                this.world.addAnimal(this.getClass().getName(), newX, newY);
+
+                this.world.getCommentator().commentSuccPropagation(this, newX, newY);
+
             } else {
-                //dodaje stosowny komentarz
+                this.world.getCommentator().commentUnsuccPropagation(this);
             }
 
             this.setPropagated(true);
             org.setPropagated(true);
         } else {
-            //stosowny komentarz, ze zwierzeta sie nie rozmnozyly
+            this.world.getCommentator().commentUnsuccPropagation(this);
         }
     }
 

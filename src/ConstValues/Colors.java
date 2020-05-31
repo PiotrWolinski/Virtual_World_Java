@@ -3,11 +3,12 @@ package ConstValues;
 import java.awt.*;
 
 public enum Colors {
-    WILK(Color.black),
+    WILK(Color.darkGray),
     OWCA(Color.white),
     LIS(Color.orange),
     ZOLW(Color.green.brighter()),
     ANTYLOPA(Color.orange.brighter()),
+    CYBEROWCA(Color.black),
     TRAWA(Color.green),
     MLECZ(Color.lightGray),
     GUARANA(Color.orange.darker()),
