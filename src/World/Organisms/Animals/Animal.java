@@ -44,7 +44,7 @@ public class Animal extends Organism {
     }
 
     public void Collision(Organism attacker) {
-        if (!attacker.getClass().equals(this.getClass())) {
+        if (!attacker.toString().equals(this.toString())) {
             if (this.getStrength() <= attacker.getStrength()) {
                 this.setAlive(false);
 
@@ -81,7 +81,7 @@ public class Animal extends Organism {
             }
 
             if (done) {
-                this.world.addAnimal(this.getClass().getName(), newX, newY);
+                this.world.addAnimal(this.toString(), newX, newY);
 
                 this.world.getCommentator().commentSuccPropagation(this, newX, newY);
 

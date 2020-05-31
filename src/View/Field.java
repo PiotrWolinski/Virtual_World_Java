@@ -23,7 +23,11 @@ public class Field extends JPanel {
 
         for (int i = 0; i < this.sizeY; i++) {
             for (int j = 0; j < this.sizeX; j++) {
-                //kolorwanie pol na podstawie organizmow z planszy
+                this.field[i][j] = new Cell(i, j);
+                if (!this.world.checkIfFieldIsEmpty(i, j)) {
+                    this.field[i][j].setBackground(this.world.returnOrganismFrom(i, j).getColor());
+                }
+                add(field[i][j]);
             }
         }
     }

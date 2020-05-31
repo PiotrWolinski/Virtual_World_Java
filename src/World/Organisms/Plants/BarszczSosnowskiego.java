@@ -21,6 +21,7 @@ public class BarszczSosnowskiego extends Plant{
             if (!this.world.checkIfFieldIsEmpty(this.Y - 1, this.X) &&
                     this.world.returnOrganismFrom(this.Y - 1, this.X).getInitiative() != 0) {
                 this.world.returnOrganismFrom(this.Y - 1, this.X).setAlive(false);
+
                 this.world.getCommentator().commentKill(this, this.world.returnOrganismFrom(this.Y - 1, this.X));
             }
         }
@@ -28,6 +29,7 @@ public class BarszczSosnowskiego extends Plant{
             if (!this.world.checkIfFieldIsEmpty(this.Y, this.X + 1) &&
                     this.world.returnOrganismFrom(this.Y, this.X + 1).getInitiative() != 0) {
                 this.world.returnOrganismFrom(this.Y, this.X + 1).setAlive(false);
+
                 this.world.getCommentator().commentKill(this, this.world.returnOrganismFrom(this.Y, this.X + 1));
             }
         }
@@ -35,6 +37,7 @@ public class BarszczSosnowskiego extends Plant{
             if (!this.world.checkIfFieldIsEmpty(this.Y + 1, this.X) &&
                     this.world.returnOrganismFrom(this.Y + 1, this.X).getInitiative() != 0) {
                 this.world.returnOrganismFrom(this.Y + 1, this.X).setAlive(false);
+
                 this.world.getCommentator().commentKill(this, this.world.returnOrganismFrom(this.Y + 1, this.X));
             }
         }
@@ -42,6 +45,7 @@ public class BarszczSosnowskiego extends Plant{
             if (!this.world.checkIfFieldIsEmpty(this.Y, this.X - 1) &&
                     this.world.returnOrganismFrom(this.Y, this.X - 1).getInitiative() != 0) {
                 this.world.returnOrganismFrom(this.Y, this.X - 1).setAlive(false);
+
                 this.world.getCommentator().commentKill(this, this.world.returnOrganismFrom(this.Y, this.X - 1));
             }
         }

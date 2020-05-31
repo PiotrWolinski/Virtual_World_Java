@@ -14,10 +14,10 @@ public class Commentator {
     public void commentKill(Organism killer, Organism victim) {
         String comment;
         if (victim instanceof Animal) {
-            comment = killer.getClass().getName() + " zabil " + victim.getClass().getName()
+            comment = killer.toString() + " zabil " + victim.toString()
                     + " na polu " + victim.getX() + " " + victim.getY() + '\n';
         } else {
-            comment = killer.getClass().getName() + " zjadl " + victim.getClass().getName()
+            comment = killer.toString() + " zjadl " + victim.toString()
                     + " na polu " + victim.getX() + " " + victim.getY() + '\n';
         }
 
@@ -27,10 +27,10 @@ public class Commentator {
     public void commentSuccPropagation(Organism parent, final int newX, final int newY) {
         String comment;
         if (parent instanceof Animal) {
-            comment = parent.getClass().getName() + " ma potomka na polu "
+            comment = parent.toString() + " ma potomka na polu "
                     + newX + " " + newY + '\n';
         } else {
-            comment = parent.getClass().getName() + " zasial potomka na polu "
+            comment = parent.toString() + " zasial potomka na polu "
                     + newX + " " + newY + '\n';
         }
 
@@ -38,7 +38,7 @@ public class Commentator {
     }
 
     public void commentUnsuccPropagation(Organism parent) {
-        String comment = parent.getClass().getName() + " nie moze miec potomka na polu "
+        String comment = parent.toString() + " nie moze miec potomka na polu "
                     + parent.getX() + " " + parent.getY() + '\n';
 
         comments.add(comment);
@@ -60,12 +60,12 @@ public class Commentator {
     }
 
     public void turtleDefended(Organism turtle, Organism attacker) {
-        String comment = turtle.getClass().getName() + " odgonil " + attacker.getClass().getName()
+        String comment = turtle.toString() + " odgonil " + attacker.toString()
                 + " na polu " + turtle.getX() + " " + turtle.getY() + '\n';
     }
 
     public void commentAntylopaUciekla(Organism running, Organism attacker, final int X, final int Y) {
-        String comment = running.getClass().getName() + " uciekla od " + attacker.getClass().getName()
+        String comment = running.toString() + " uciekla od " + attacker.toString()
                 + " na pole " + running.getX() + " " + running.getY() + '\n';
     }
 }

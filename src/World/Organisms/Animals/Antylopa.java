@@ -75,7 +75,7 @@ public class Antylopa extends Animal {
 
         boolean run = new Random().nextBoolean();
 
-        if (this.getClass().equals(attacker.getClass())) {
+        if (attacker.toString().equals(this.toString())) {
             makeDescendant(attacker);
         } else if (!run) {
             if (this.getStrength() <= attacker.getStrength()) {

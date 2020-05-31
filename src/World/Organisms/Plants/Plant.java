@@ -68,7 +68,7 @@ public abstract class Plant extends Organism {
             } while (!propagated && bound != dir);
 
             if (propagated && !this.propagated) {
-                this.world.addPlant(this.getClass().getName(), newX, newY);
+                this.world.addPlant(this.toString(), newX, newY);
 
                 this.world.getCommentator().commentSuccPropagation(this, newX, newY);
             }

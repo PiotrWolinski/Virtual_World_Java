@@ -6,6 +6,7 @@ import World.Organisms.*;
 import ConstValues.OrganismsEnum;
 import World.Organisms.Animals.*;
 import World.Organisms.Plants.*;
+import View.*;
 
 public class World {
     private int sizeX;
@@ -17,6 +18,7 @@ public class World {
     private Random generator;
     private Czlowiek czlowiek;
     private Commentator commentator;
+    private Screen screen;
 
     public int getSizeX() {
         return sizeX;
@@ -46,6 +48,7 @@ public class World {
         animals = new ArrayList<Organism>();
         plants = new ArrayList<Organism>();
         commentator = new Commentator();
+        screen = new Screen(this);
 
         initField();
 
@@ -99,6 +102,10 @@ public class World {
                 org = new Antylopa(newY, newX, this);
                 break;
             }
+            case "CyberOwca": {
+                org = new CyberOwca(newY, newX, this);
+                break;
+            }
         }
 
         if (org != null) {
@@ -148,15 +155,15 @@ public class World {
             }
         }
 
-        for (int i = 0; i < animals.size(); ++i) {
-            if (animals.get(i).isAlive()) {
-                field[animals.get(i).getY()][animals.get(i).getX()] = animals.get(i);
+        for (Organism animal : animals) {
+            if (animal.isAlive()) {
+                field[animal.getY()][animal.getX()] = animal;
             }
         }
 
-        for (int i = 0; i < plants.size(); ++i) {
-            if (plants.get(i).isAlive()) {
-                field[plants.get(i).getY()][plants.get(i).getX()] = plants.get(i);
+        for (Organism plant : plants) {
+            if (plant.isAlive()) {
+                field[plant.getY()][plant.getX()] = plant;
             }
         }
     }
@@ -169,17 +176,21 @@ public class World {
             animals.get(i).Action();
 
             deleteDead();
+            animals.trimToSize();
 
             updateField();
         }
 
-        for (int i = 0 ; i < animals.size() ; i++) {
-            animals.get(i).Action();
+        for (int i = 0 ; i < plants.size() ; i++) {
+            plants.get(i).Action();
 
             deleteDead();
+            plants.trimToSize();
 
             updateField();
         }
+
+        resetPropagated();
     }
 
     public void saveGame() {
@@ -189,11 +200,6 @@ public class World {
     public void readSave() {
 
     }
-
-    public void simulate() {
-
-    }
-
 
     private void initField() {
         this.field = new Organism[sizeY][sizeX];
@@ -343,8 +349,5 @@ public class World {
 
         field = null;
     }
-
-
-
 
 }

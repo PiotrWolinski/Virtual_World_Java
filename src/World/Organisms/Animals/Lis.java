@@ -9,7 +9,7 @@ public class Lis extends Animal {
     public Lis(final int Y, final int X, World world) {
         super(Y, X, world);
         this.strength = 4;
-        this.initiative = 3;
+        this.initiative = 7;
         this.age = 1;
         this.alive = true;
         this.propagated = false;

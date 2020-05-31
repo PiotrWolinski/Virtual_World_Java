@@ -35,7 +35,7 @@ public class Zolw extends Animal {
     }
 
     public void Collision(Organism attacker) {
-        if (!attacker.getClass().equals(this.getClass())) {
+        if (!attacker.toString().equals(this.toString())) {
             if (attacker.getStrength() < 5) {
                 attacker.setX(attacker.getLastX());
                 attacker.setY(attacker.getLastY());

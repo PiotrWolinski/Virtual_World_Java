@@ -4,26 +4,22 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Cell extends JButton {
-    private int X;
-    private int Y;
+    private final int row;
+    private final int column;
 
-    public Cell(final int X, final int Y) {
+    public Cell(final int column, final int row) {
         super(" ");
-        this.X = X;
-        this.Y = Y;
-        this.setBorderPainted(false);
+        this.row = row;
+        this.column = column;
         this.setFocusPainted(false);
-        //this.setText(" ");
         this.setBackground(Color.YELLOW.brighter());
     }
 
-    @Override
-    public int getX() {
-        return X;
+    public int getRow() {
+        return this.row;
     }
 
-    @Override
-    public int getY() {
-        return Y;
+    public int getColumn() {
+        return this.column;
     }
 }

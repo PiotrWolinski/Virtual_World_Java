@@ -11,11 +11,12 @@ public class Menu extends JPanel {
 
     public Menu(World world, Field field, JFrame frame) {
         setLayout(new GridLayout(5, 1));
+
         MenuButton nextTurn = new MenuButton("Nastepna tura");
         nextTurn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // przeprowadz ture dla swiata
+                world.makeTurn();
                 field.updateField();
                 // komentarze zostana dodane
             }
