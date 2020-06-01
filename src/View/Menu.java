@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 
 public class Menu extends JPanel {
 
-    public Menu(World world, Field field, JFrame frame) {
+    public Menu(World world, Field field, JFrame frame, Screen screen) {
         setLayout(new GridLayout(5, 1));
 
         MenuButton nextTurn = new MenuButton("Nastepna tura");
@@ -43,6 +43,8 @@ public class Menu extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 world.readSave();
+                field.updateField();
+                screen.closeList();
             }
         });
 

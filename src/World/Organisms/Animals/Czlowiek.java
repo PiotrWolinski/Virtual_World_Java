@@ -40,6 +40,38 @@ public class Czlowiek extends Animal {
         this.input = input;
     }
 
+    public int getLastInput() {
+        return lastInput;
+    }
+
+    public void setLastInput(int lastInput) {
+        this.lastInput = lastInput;
+    }
+
+    public boolean isAbility() {
+        return ability;
+    }
+
+    public void setAbility(boolean ability) {
+        this.ability = ability;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    public int getReset() {
+        return reset;
+    }
+
+    public void setReset(int reset) {
+        this.reset = reset;
+    }
+
     public void Action() {
         Action(this.getInput());
         this.setInput(0);

@@ -5,12 +5,14 @@ import ConstValues.*;
 
 import javax.swing.*;
 import java.awt.*;
-public class OrganismsList extends JPanel {
+public class OrganismsList {
     private Cell list[];
+
+    private JFrame frame;
     public OrganismsList(World world) {
         this.list = new Cell[OrganismsEnum.SUMA_ORGANIZMOW.getId()];
         EventQueue.invokeLater(() -> {
-            JFrame frame = new JFrame("Lista organizmow");
+            frame = new JFrame("Lista organizmow");
             JPanel list = new JPanel();
             list.setLayout(new GridLayout(OrganismsEnum.SUMA_ORGANIZMOW.getId(), 1));
 
@@ -29,5 +31,9 @@ public class OrganismsList extends JPanel {
             frame.setSize(200, 700);
             frame.setVisible(true);
         });
+    }
+
+    public void close() {
+        frame.dispose();
     }
 }

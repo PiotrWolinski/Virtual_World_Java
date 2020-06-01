@@ -1,6 +1,7 @@
 package World;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
@@ -10,6 +11,9 @@ import ConstValues.OrganismsEnum;
 import World.Organisms.Animals.*;
 import World.Organisms.Plants.*;
 import View.*;
+
+import static java.lang.Boolean.parseBoolean;
+import static java.lang.Integer.parseInt;
 
 public class World {
     private int sizeX;
@@ -208,12 +212,14 @@ public class World {
             FileWriter printer = new FileWriter(fileName);
 
             printer.write(sizeY + " " + sizeX + " " + round + '\n');
-            printer.write(animals.size() + '\n');
+            printer.write(Integer.toString(animals.size()));
+            printer.write("\n");
             for (int i = 0 ; i < animals.size(); i++) {
                 printer.write(animals.get(i).save() + '\n');
             }
 
-            printer.write(plants.size() + '\n');
+            printer.write(Integer.toString(plants.size()));
+            printer.write("\n");
             for (int i = 0 ; i < plants.size(); i++) {
                 printer.write(plants.get(i).save() + '\n');
             }
@@ -229,7 +235,109 @@ public class World {
     public void readSave() {
         clearData();
 
-        Scanner file = new Scanner(fileName);
+        plants = new ArrayList<>();
+        animals = new ArrayList<>();
+
+        File input = new File(fileName);
+
+        try {
+            Scanner scanner = new Scanner(input);
+
+
+            String[] mainSplit = scanner.nextLine().split(" ");
+            this.sizeY = parseInt(mainSplit[0]);
+            this.sizeX = parseInt(mainSplit[1]);
+            this.round = parseInt(mainSplit[2]);
+            while (scanner.hasNext()) {
+                int animals_size = parseInt(scanner.nextLine());
+
+                for (int i = 0; i < animals_size; i++) {
+                    String[] split = scanner.nextLine().split(" ");
+                    switch (split[0]) {
+                        case "Wilk": {
+                            animals.add(new Wilk(parseInt(split[1]), parseInt(split[2]), this));
+                            break;
+                        }
+                        case "Owca": {
+                            animals.add(new Owca(parseInt(split[1]), parseInt(split[2]), this));
+                            break;
+                        }
+                        case "Lis": {
+                            animals.add(new Lis(parseInt(split[1]), parseInt(split[2]), this));
+                            break;
+                        }
+                        case "Zolw": {
+                            animals.add(new Zolw(parseInt(split[1]), parseInt(split[2]), this));
+                            break;
+                        }
+                        case "Antylopa": {
+                            animals.add(new Antylopa(parseInt(split[1]), parseInt(split[2]), this));
+                            break;
+                        }
+                        case "CyberOwca": {
+                            animals.add(new CyberOwca(parseInt(split[1]), parseInt(split[2]), this));
+                            break;
+                        }
+                        case "Czlowiek": {
+                            animals.add(new Czlowiek(parseInt(split[1]), parseInt(split[2]), this));
+                            this.czlowiek = (Czlowiek) animals.get(i);
+                            break;
+                        }
+                    }
+                    read(i, split, animals);
+                    if (split[0].equals("Czlowiek")) {
+                        this.czlowiek.setAbility(parseBoolean(split[9]));
+                        this.czlowiek.setDuration(parseInt(split[10]));
+                        this.czlowiek.setReset(parseInt(split[11]));
+                        this.czlowiek.setLastInput(parseInt(split[12]));
+                        this.czlowiek.setInput(parseInt(split[13]));
+                    }
+                }
+
+                int plants_size = parseInt(scanner.nextLine());
+
+                for (int i=0; i < plants_size; i++) {
+                    String[] split = scanner.nextLine().split(" ");
+
+                    switch (split[0]) {
+                        case "Trawa": {
+                            plants.add(new Trawa(parseInt(split[1]), parseInt(split[2]), this));
+                            break;
+                        }
+                        case "Mlecz": {
+                            plants.add(new Mlecz(parseInt(split[1]), parseInt(split[2]), this));
+                            break;
+                        }
+                        case "Guarana": {
+                            plants.add(new Guarana(parseInt(split[1]), parseInt(split[2]), this));
+                            break;
+                        }
+                        case "WilczeJagody": {
+                            plants.add(new WilczeJagody(parseInt(split[1]), parseInt(split[2]), this));
+                            break;
+                        }
+                        case "BarszczSosnowskiego": {
+                            plants.add(new BarszczSosnowskiego(parseInt(split[1]), parseInt(split[2]), this));
+                            break;
+                        }
+                    }
+                    read(i, split, plants);
+                }
+            }
+        } catch (FileNotFoundException e) {
+
+        }
+
+            initField();
+
+            sortPlants();
+            sortAnimals();
+
+            updateField();
+
+            screen = new Screen(this);
+
+        /*Scanner file = new Scanner(fileName);
         this.sizeY = file.nextInt();
         this.sizeX = file.nextInt();
         this.round = file.nextInt();
@@ -272,11 +380,80 @@ public class World {
                     break;
                 }
             }
+            animals.get(i).setStrength(file.nextInt());
+            animals.get(i).setAge(file.nextInt());
+            animals.get(i).setLastX(file.nextInt());
+            animals.get(i).setLastY(file.nextInt());
+            animals.get(i).setAlive(file.nextBoolean());
+            animals.get(i).setPropagated(file.nextBoolean());
+            if (type.equals("Czlowiek")) {
+                this.czlowiek.setAbility(file.nextBoolean());
+                this.czlowiek.setDuration(file.nextInt());
+                this.czlowiek.setReset(file.nextInt());
+                this.czlowiek.setLastInput(file.nextInt());
+                this.czlowiek.setInput(file.nextInt());
+            }
         }
+
+        int plants_size = file.nextInt();
+
+        for (int i=0; i < plants_size; i++) {
+            String type = file.next();
+            int tmpX = file.nextInt();
+            int tmpY = file.nextInt();
+
+            switch (type) {
+                case "Trawa": {
+                    animals.add(new Trawa(tmpY, tmpX, this));
+                    break;
+                }
+                case "Mlecz": {
+                    animals.add(new Mlecz(tmpY, tmpX, this));
+                    break;
+                }
+                case "Guarana": {
+                    animals.add(new Guarana(tmpY, tmpX, this));
+                    break;
+                }
+                case "WilczeJagody": {
+                    animals.add(new WilczeJagody(tmpY, tmpX, this));
+                    break;
+                }
+                case "BarszczSosnowskiego": {
+                    animals.add(new BarszczSosnowskiego(tmpY, tmpX, this));
+                    break;
+                }
+            }
+            plants.get(i).setStrength(file.nextInt());
+            plants.get(i).setAge(file.nextInt());
+            plants.get(i).setLastX(file.nextInt());
+            plants.get(i).setLastY(file.nextInt());
+            plants.get(i).setAlive(file.nextBoolean());
+            plants.get(i).setPropagated(file.nextBoolean());
+        }
+
+        initField();
+
+        sortPlants();
+        sortAnimals();
+
+        updateField();
+
+         */
+
+    }
+
+    private void read(int i, String[] split, ArrayList<Organism> plants) {
+        plants.get(i).setStrength(parseInt(split[3]));
+        plants.get(i).setAge(parseInt(split[4]));
+        plants.get(i).setLastX(parseInt(split[5]));
+        plants.get(i).setLastY(parseInt(split[6]));
+        plants.get(i).setAlive(parseBoolean(split[7]));
+        plants.get(i).setPropagated(parseBoolean(split[8]));
     }
 
     private void initField() {
-        this.field = new Organism[sizeY][sizeX];
+        this.field = new Organism[this.sizeY][this.sizeX];
     }
 
     private void sortAnimals() {
@@ -431,6 +608,8 @@ public class World {
         plants = null;
 
         field = null;
+        sizeX = -1;
+        sizeY = -1;
     }
 
 }
