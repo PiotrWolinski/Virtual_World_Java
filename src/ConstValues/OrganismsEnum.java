@@ -8,13 +8,14 @@ public enum OrganismsEnum {
     LIS(2),
     ZOLW(3),
     ANTYLOPA(4),
-    CyberOwca(5),
+    CYBER_OWCA(5),
     TRAWA(6),
     MLECZ(7),
     GUARANA(8),
     WILCZE_JAGODY(9),
     BARSZCZ_SOSNOWSKIEGO(10),
-    SUMA_ORGANIZMOW(11);
+    CZLOWIEK(11),
+    SUMA_ORGANIZMOW(12);
 
     public final int id;
 

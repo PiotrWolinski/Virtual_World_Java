@@ -62,10 +62,21 @@ public class Commentator {
     public void turtleDefended(Organism turtle, Organism attacker) {
         String comment = turtle.toString() + " odgonil " + attacker.toString()
                 + " na polu " + turtle.getX() + " " + turtle.getY() + '\n';
+
+        comments.add(comment);
     }
 
     public void commentAntylopaUciekla(Organism running, Organism attacker, final int X, final int Y) {
         String comment = running.toString() + " uciekla od " + attacker.toString()
                 + " na pole " + running.getX() + " " + running.getY() + '\n';
+
+        comments.add(comment);
+    }
+
+    public void commentAbility(int duration) {
+        String comment = "Moja specjalna umiejetnosc jest teraz aktywna i bedzie jeszcze przez " + duration
+                + " tur\n";
+
+        comments.add(comment);
     }
 }

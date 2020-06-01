@@ -20,6 +20,8 @@ public class Screen {
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setSize(1200, 960);
             frame.setVisible(true);
+
+            OrganismsList list = new OrganismsList(world);
         });
     }
 

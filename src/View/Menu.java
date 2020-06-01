@@ -26,7 +26,7 @@ public class Menu extends JPanel {
         exit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                frame.dispose();
+                System.exit(0);
             }
         });
 
@@ -50,7 +50,7 @@ public class Menu extends JPanel {
         humanAbility.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                world.activateAbility();
             }
         });
         this.add(nextTurn);
@@ -58,6 +58,5 @@ public class Menu extends JPanel {
         this.add(save);
         this.add(read);
         this.add(exit);
-
     }
 }

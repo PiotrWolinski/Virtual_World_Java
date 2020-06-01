@@ -17,11 +17,15 @@ public class Guarana extends Plant {
 
     public void Collision(Organism attacker) {
         if (attacker.getStrength() >= this.getStrength()) {
-            this.alive = false;
+            this.setAlive(false);
             attacker.setStrength(attacker.getStrength() + 3);
+
+            this.world.getCommentator().commentKill(attacker, this);
         }
         else {
             attacker.setAlive(false);
+
+            this.world.getCommentator().commentKill( this, attacker);
         }
     }
 }

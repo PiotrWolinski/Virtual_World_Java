@@ -1,5 +1,8 @@
 package World;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 import World.Organisms.*;
@@ -19,6 +22,7 @@ public class World {
     private Czlowiek czlowiek;
     private Commentator commentator;
     private Screen screen;
+    private String fileName;
 
     public int getSizeX() {
         return sizeX;
@@ -49,8 +53,13 @@ public class World {
         plants = new ArrayList<Organism>();
         commentator = new Commentator();
         screen = new Screen(this);
+        fileName = "save.txt";
 
         initField();
+
+        this.czlowiek = new Czlowiek(generator.nextInt(sizeY), generator.nextInt(sizeX), this);
+        this.field[this.czlowiek.getY()][this.czlowiek.getX()] = this.czlowiek;
+        animals.add(czlowiek);
 
         addOrganisms();
 
@@ -176,7 +185,6 @@ public class World {
             animals.get(i).Action();
 
             deleteDead();
-            animals.trimToSize();
 
             updateField();
         }
@@ -185,20 +193,86 @@ public class World {
             plants.get(i).Action();
 
             deleteDead();
-            plants.trimToSize();
 
             updateField();
         }
 
+        nextTurn();
         resetPropagated();
     }
 
     public void saveGame() {
+        try {
+            File file = new File(fileName);
+            file.createNewFile();
+            FileWriter printer = new FileWriter(fileName);
 
+            printer.write(sizeY + " " + sizeX + " " + round + '\n');
+            printer.write(animals.size() + '\n');
+            for (int i = 0 ; i < animals.size(); i++) {
+                printer.write(animals.get(i).save() + '\n');
+            }
+
+            printer.write(plants.size() + '\n');
+            for (int i = 0 ; i < plants.size(); i++) {
+                printer.write(plants.get(i).save() + '\n');
+            }
+
+            printer.close();
+
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
     }
 
     public void readSave() {
+        clearData();
 
+        Scanner file = new Scanner(fileName);
+        this.sizeY = file.nextInt();
+        this.sizeX = file.nextInt();
+        this.round = file.nextInt();
+
+        int animals_size = file.nextInt();
+
+        for (int i=0; i < animals_size; i++) {
+            String type = file.next();
+            int tmpX = file.nextInt();
+            int tmpY = file.nextInt();
+
+            switch(type) {
+                case "Wilk": {
+                    animals.add(new Wilk(tmpY, tmpX, this));
+                    break;
+                }
+                case "Owca": {
+                    animals.add(new Owca(tmpY, tmpX, this));
+                    break;
+                }
+                case "Lis": {
+                    animals.add(new Lis(tmpY, tmpX, this));
+                    break;
+                }
+                case "Zolw": {
+                    animals.add(new Zolw(tmpY, tmpX, this));
+                    break;
+                }
+                case "Antylopa": {
+                    animals.add(new Antylopa(tmpY, tmpX, this));
+                    break;
+                }
+                case "CyberOwca": {
+                    animals.add(new CyberOwca(tmpY, tmpX, this));
+                    break;
+                }
+                case "Czlowiek": {
+                    animals.add(new Czlowiek(tmpY, tmpX, this));
+                    this.czlowiek = (Czlowiek)animals.get(i);
+                    break;
+                }
+            }
+        }
     }
 
     private void initField() {
@@ -311,19 +385,20 @@ public class World {
     }
 
     private void deleteDead() {
-        for (int i = 0; i < animals.size(); i++) {
-            if (!animals.get(i).isAlive()) {
-                field[animals.get(i).getY()][animals.get(i).getX()] = null;
-                animals.remove(animals.get(i));
+        delete(animals);
+
+        delete(plants);
+    }
+
+    private void delete(ArrayList<Organism> organisms) {
+        for (int i = 0; i < organisms.size(); i++) {
+            if (!organisms.get(i).isAlive()) {
+                field[organisms.get(i).getY()][organisms.get(i).getX()] = null;
+                organisms.remove(organisms.get(i));
             }
         }
 
-        for (int i = 0; i < plants.size(); i++) {
-            if (!plants.get(i).isAlive()) {
-                field[plants.get(i).getY()][plants.get(i).getX()] = null;
-                plants.remove(plants.get(i));
-            }
-        }
+        animals.trimToSize();
     }
 
     private void resetPropagated() {
@@ -336,8 +411,16 @@ public class World {
         }
     }
 
+    public void setHumanInput(int input) {
+        this.czlowiek.setInput(input);
+    }
+
     private void nextTurn() {
         round++;
+    }
+
+    public void activateAbility() {
+        this.czlowiek.activate();
     }
 
     private void clearData() {

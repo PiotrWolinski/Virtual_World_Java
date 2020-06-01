@@ -14,6 +14,10 @@ public class Mlecz extends Plant {
         this.color = Colors.MLECZ.getColor();
     }
 
-    public void Action() { for (int i=0; i < 3; ++i) super.Action();
+    public void Action() {
+        for (int i=0; i < 3; ++i) {
+            super.Action();
+            this.world.updateField();
+        }
     }
 }

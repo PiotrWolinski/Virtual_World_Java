@@ -89,4 +89,12 @@ public abstract class Organism {
 
     @Override
     public String toString() { return this.getClass().getSimpleName(); }
+
+    public String save() {
+        String out;
+        out = this.toString() + " " + X + " " + Y + " " + strength + " " + age + " "
+                + lastX + " " + lastY + " " + alive + " " + propagated;
+
+        return out;
+    }
 }

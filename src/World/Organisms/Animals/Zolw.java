@@ -50,8 +50,11 @@ public class Zolw extends Animal {
 
                 this.world.getCommentator().commentKill(attacker, this);
             }
-        } else {
+        } else if (!attacker.toString().equals(this.toString()) && this != attacker) {
             makeDescendant(attacker);
+
+            attacker.setX(attacker.getLastX());
+            attacker.setY(attacker.getLastY());
         }
     }
 }

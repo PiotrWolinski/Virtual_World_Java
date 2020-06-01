@@ -54,8 +54,11 @@ public class Animal extends Organism {
 
                 this.world.getCommentator().commentKill( this, attacker);
             }
-        } else {
+        } else if (attacker.toString().equals(this.toString()) && this != attacker) {
             makeDescendant(attacker);
+
+            attacker.setX(attacker.getLastX());
+            attacker.setY(attacker.getLastY());
         }
     }
 
