@@ -8,8 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
 public class Field extends JPanel {
-    private final int sizeY;
-    private final int sizeX;
+    private int sizeY;
+    private int sizeX;
 
     private Cell[][] field;
     private World world;
@@ -76,6 +76,22 @@ public class Field extends JPanel {
                 } else {
                     field[i][j].setDefault();
                 }
+            }
+        }
+    }
+
+    public void reloadField() {
+        this.sizeY = world.getSizeY();
+        this.sizeX = world.getSizeX();
+        field = new Cell[this.sizeY][this.sizeX];
+
+        for (int i = 0; i < this.sizeY; i++) {
+            for (int j = 0; j < this.sizeX; j++) {
+                this.field[i][j] = new Cell(i, j);
+                if (!this.world.checkIfFieldIsEmpty(i, j)) {
+                    this.field[i][j].setBackground(this.world.returnOrganismFrom(i, j).getColor());
+                }
+                add(field[i][j]);
             }
         }
     }

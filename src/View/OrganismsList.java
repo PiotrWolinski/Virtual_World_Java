@@ -23,6 +23,8 @@ public class OrganismsList {
                 this.list[i] = new Cell(-1,-1);
                 this.list[i].setText(names[i]);
                 this.list[i].setBackground(Colors.values()[i].getColor());
+                this.list[i].setFocusPainted(false);
+                this.list[i].setBorderPainted(false);
                 list.add(this.list[i]);
             }
 

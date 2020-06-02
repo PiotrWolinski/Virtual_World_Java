@@ -30,13 +30,13 @@ public class Antylopa extends Animal {
 
         while (!moved) {
             int newDirection = direction.nextInt(4) ;
-            if (newDirection == 0 && this.Y > 0) {
+            if (newDirection == 0 && this.Y > 0 ) {
                 this.Y--;
                 moved = true;
             } else if (newDirection == 1  && this.X < this.world.getSizeX() - 1) {
                 this.X++;
                 moved = true;
-            } else if (newDirection == 2  && this.Y < this.world.getSizeY() - 1 ) {
+            } else if (newDirection == 2  && this.Y < this.world.getSizeY() - 1) {
                 this.Y++;
                 moved = true;
             } else if (newDirection == 3 && this.X > 0) {
@@ -51,22 +51,22 @@ public class Antylopa extends Animal {
 
         while (!moved) {
             int newDirection = direction.nextInt(4);
-            if (newDirection == 0 && this.Y > 0) {
+            if (newDirection == 0 && this.Y > 0 && Y - 1 != lastY) {
                 this.Y--;
                 moved = true;
-            } else if (newDirection == 1 && this.X < this.world.getSizeX() - 1) {
+            } else if (newDirection == 1 && this.X < this.world.getSizeX() - 1 && X + 1 != lastX) {
                 this.X++;
                 moved = true;
-            } else if (newDirection == 2 && this.Y < this.world.getSizeY() - 1 ) {
+            } else if (newDirection == 2 && this.Y < this.world.getSizeY() - 1 && Y + 1 != lastY) {
                 this.Y++;
                 moved = true;
-            } else if (newDirection == 3 && this.X > 0) {
+            } else if (newDirection == 3 && this.X > 0 && X - 1 != lastX) {
                 this.X--;
                 moved = true;
             }
         }
 
-        if (!world.checkIfFieldIsEmpty(this.Y, this.X)) {
+        if (!world.checkIfFieldIsEmpty(this.Y, this.X) && world.returnOrganismFrom(this.Y, this.X) != this) {
             world.returnOrganismFrom(this.Y, this.X).Collision(this);
         }
     }

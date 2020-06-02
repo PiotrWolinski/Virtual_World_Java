@@ -48,15 +48,14 @@ public class Commentator {
         comments.clear();
     }
 
-    public String getComments() {
-        String answer;
-        if (comments.size() > 0) {
-            answer = comments.get(0);
-            comments.remove(0);
-            return answer;
-        } else {
-            return "Przeczytano wszystkie komentarze\n";
+    public String[] getComments() {
+        String[] answer = new String[comments.size()];
+
+        for (int i=0; i < comments.size() ; i++) {
+            answer[i] = comments.get(i);
         }
+        clearComments();
+        return answer;
     }
 
     public void turtleDefended(Organism turtle, Organism attacker) {

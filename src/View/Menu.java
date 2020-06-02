@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 
 public class Menu extends JPanel {
 
-    public Menu(World world, Field field, JFrame frame, Screen screen) {
+    public Menu(World world, Field field, JFrame frame, Screen screen, CommentatorLobby comments) {
         setLayout(new GridLayout(5, 1));
 
         MenuButton nextTurn = new MenuButton("Nastepna tura");
@@ -18,7 +18,7 @@ public class Menu extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 world.makeTurn();
                 field.updateField();
-                // komentarze zostana dodane
+                comments.updateComments();
             }
         });
 
@@ -43,7 +43,7 @@ public class Menu extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 world.readSave();
-                field.updateField();
+                field.reloadField();
                 screen.closeList();
             }
         });

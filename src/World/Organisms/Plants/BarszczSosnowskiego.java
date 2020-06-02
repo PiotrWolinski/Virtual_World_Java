@@ -1,6 +1,7 @@
 package World.Organisms.Plants;
 
 import ConstValues.Colors;
+import World.Organisms.Animals.CyberOwca;
 import World.Organisms.Organism;
 import World.World;
 
@@ -19,7 +20,8 @@ public class BarszczSosnowskiego extends Plant{
 
         if (this.Y > 0) {
             if (!this.world.checkIfFieldIsEmpty(this.Y - 1, this.X) &&
-                    this.world.returnOrganismFrom(this.Y - 1, this.X).getInitiative() != 0) {
+                    this.world.returnOrganismFrom(this.Y - 1, this.X).getInitiative() != 0
+                    &&  !(this.world.returnOrganismFrom(this.Y - 1, this.X).toString().equals("CyberOwca")) ) {
                 this.world.returnOrganismFrom(this.Y - 1, this.X).setAlive(false);
 
                 this.world.getCommentator().commentKill(this, this.world.returnOrganismFrom(this.Y - 1, this.X));
@@ -27,7 +29,8 @@ public class BarszczSosnowskiego extends Plant{
         }
         if (this.X < this.world.getSizeX() - 1) {
             if (!this.world.checkIfFieldIsEmpty(this.Y, this.X + 1) &&
-                    this.world.returnOrganismFrom(this.Y, this.X + 1).getInitiative() != 0) {
+                    this.world.returnOrganismFrom(this.Y, this.X + 1).getInitiative() != 0
+                    &&  !(this.world.returnOrganismFrom(this.Y, this.X + 1).toString().equals("CyberOwca"))) {
                 this.world.returnOrganismFrom(this.Y, this.X + 1).setAlive(false);
 
                 this.world.getCommentator().commentKill(this, this.world.returnOrganismFrom(this.Y, this.X + 1));
@@ -35,7 +38,8 @@ public class BarszczSosnowskiego extends Plant{
         }
         if (this.Y < this.world.getSizeY() - 1) {
             if (!this.world.checkIfFieldIsEmpty(this.Y + 1, this.X) &&
-                    this.world.returnOrganismFrom(this.Y + 1, this.X).getInitiative() != 0) {
+                    this.world.returnOrganismFrom(this.Y + 1, this.X).getInitiative() != 0
+                    &&  !(this.world.returnOrganismFrom(this.Y + 1, this.X).toString().equals("CyberOwca"))) {
                 this.world.returnOrganismFrom(this.Y + 1, this.X).setAlive(false);
 
                 this.world.getCommentator().commentKill(this, this.world.returnOrganismFrom(this.Y + 1, this.X));
@@ -43,7 +47,8 @@ public class BarszczSosnowskiego extends Plant{
         }
         if (this.X > 0) {
             if (!this.world.checkIfFieldIsEmpty(this.Y, this.X - 1) &&
-                    this.world.returnOrganismFrom(this.Y, this.X - 1).getInitiative() != 0) {
+                    this.world.returnOrganismFrom(this.Y, this.X - 1).getInitiative() != 0
+                    &&  !(this.world.returnOrganismFrom(this.Y, this.X - 1).toString().equals("CyberOwca"))) {
                 this.world.returnOrganismFrom(this.Y, this.X - 1).setAlive(false);
 
                 this.world.getCommentator().commentKill(this, this.world.returnOrganismFrom(this.Y, this.X - 1));
@@ -56,8 +61,11 @@ public class BarszczSosnowskiego extends Plant{
     }
 
     public void Collision(Organism attacker) {
-
-        attacker.setAlive(false);
+        if (!(attacker.toString().equals("CyberOwca"))) {
+            attacker.setAlive(false);
+        } else {
+            this.setAlive(false);
+        }
 
         this.world.getCommentator().commentKill(this, attacker);
     }

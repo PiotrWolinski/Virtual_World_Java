@@ -59,6 +59,8 @@ public class World {
         screen = new Screen(this);
         fileName = "save.txt";
 
+        screen.run();
+
         initField();
 
         this.czlowiek = new Czlowiek(generator.nextInt(sizeY), generator.nextInt(sizeX), this);
@@ -336,110 +338,7 @@ public class World {
             updateField();
 
             screen = new Screen(this);
-
-        /*Scanner file = new Scanner(fileName);
-        this.sizeY = file.nextInt();
-        this.sizeX = file.nextInt();
-        this.round = file.nextInt();
-
-        int animals_size = file.nextInt();
-
-        for (int i=0; i < animals_size; i++) {
-            String type = file.next();
-            int tmpX = file.nextInt();
-            int tmpY = file.nextInt();
-
-            switch(type) {
-                case "Wilk": {
-                    animals.add(new Wilk(tmpY, tmpX, this));
-                    break;
-                }
-                case "Owca": {
-                    animals.add(new Owca(tmpY, tmpX, this));
-                    break;
-                }
-                case "Lis": {
-                    animals.add(new Lis(tmpY, tmpX, this));
-                    break;
-                }
-                case "Zolw": {
-                    animals.add(new Zolw(tmpY, tmpX, this));
-                    break;
-                }
-                case "Antylopa": {
-                    animals.add(new Antylopa(tmpY, tmpX, this));
-                    break;
-                }
-                case "CyberOwca": {
-                    animals.add(new CyberOwca(tmpY, tmpX, this));
-                    break;
-                }
-                case "Czlowiek": {
-                    animals.add(new Czlowiek(tmpY, tmpX, this));
-                    this.czlowiek = (Czlowiek)animals.get(i);
-                    break;
-                }
-            }
-            animals.get(i).setStrength(file.nextInt());
-            animals.get(i).setAge(file.nextInt());
-            animals.get(i).setLastX(file.nextInt());
-            animals.get(i).setLastY(file.nextInt());
-            animals.get(i).setAlive(file.nextBoolean());
-            animals.get(i).setPropagated(file.nextBoolean());
-            if (type.equals("Czlowiek")) {
-                this.czlowiek.setAbility(file.nextBoolean());
-                this.czlowiek.setDuration(file.nextInt());
-                this.czlowiek.setReset(file.nextInt());
-                this.czlowiek.setLastInput(file.nextInt());
-                this.czlowiek.setInput(file.nextInt());
-            }
-        }
-
-        int plants_size = file.nextInt();
-
-        for (int i=0; i < plants_size; i++) {
-            String type = file.next();
-            int tmpX = file.nextInt();
-            int tmpY = file.nextInt();
-
-            switch (type) {
-                case "Trawa": {
-                    animals.add(new Trawa(tmpY, tmpX, this));
-                    break;
-                }
-                case "Mlecz": {
-                    animals.add(new Mlecz(tmpY, tmpX, this));
-                    break;
-                }
-                case "Guarana": {
-                    animals.add(new Guarana(tmpY, tmpX, this));
-                    break;
-                }
-                case "WilczeJagody": {
-                    animals.add(new WilczeJagody(tmpY, tmpX, this));
-                    break;
-                }
-                case "BarszczSosnowskiego": {
-                    animals.add(new BarszczSosnowskiego(tmpY, tmpX, this));
-                    break;
-                }
-            }
-            plants.get(i).setStrength(file.nextInt());
-            plants.get(i).setAge(file.nextInt());
-            plants.get(i).setLastX(file.nextInt());
-            plants.get(i).setLastY(file.nextInt());
-            plants.get(i).setAlive(file.nextBoolean());
-            plants.get(i).setPropagated(file.nextBoolean());
-        }
-
-        initField();
-
-        sortPlants();
-        sortAnimals();
-
-        updateField();
-
-         */
+            screen.run();
 
     }
 
@@ -607,9 +506,31 @@ public class World {
         plants.clear();
         plants = null;
 
+        screen.stop();
+        screen = null;
+
         field = null;
         sizeX = -1;
         sizeY = -1;
+    }
+
+    public boolean containsBarszcz() {
+        for (Organism plant: plants) {
+            if (plant instanceof BarszczSosnowskiego) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public ArrayList returnBarszcz() {
+        ArrayList<BarszczSosnowskiego> barszcz = new ArrayList<>();
+        for (Organism plant: plants) {
+            if (plant instanceof BarszczSosnowskiego) {
+                barszcz.add((BarszczSosnowskiego)plant);
+            }
+        }
+        return barszcz;
     }
 
 }
