@@ -245,7 +245,6 @@ public class World {
         try {
             Scanner scanner = new Scanner(input);
 
-
             String[] mainSplit = scanner.nextLine().split(" ");
             this.sizeY = parseInt(mainSplit[0]);
             this.sizeX = parseInt(mainSplit[1]);
@@ -257,31 +256,31 @@ public class World {
                     String[] split = scanner.nextLine().split(" ");
                     switch (split[0]) {
                         case "Wilk": {
-                            animals.add(new Wilk(parseInt(split[1]), parseInt(split[2]), this));
+                            animals.add(new Wilk(parseInt(split[2]), parseInt(split[1]), this));
                             break;
                         }
                         case "Owca": {
-                            animals.add(new Owca(parseInt(split[1]), parseInt(split[2]), this));
+                            animals.add(new Owca(parseInt(split[2]), parseInt(split[1]), this));
                             break;
                         }
                         case "Lis": {
-                            animals.add(new Lis(parseInt(split[1]), parseInt(split[2]), this));
+                            animals.add(new Lis(parseInt(split[2]), parseInt(split[1]), this));
                             break;
                         }
                         case "Zolw": {
-                            animals.add(new Zolw(parseInt(split[1]), parseInt(split[2]), this));
+                            animals.add(new Zolw(parseInt(split[2]), parseInt(split[1]), this));
                             break;
                         }
                         case "Antylopa": {
-                            animals.add(new Antylopa(parseInt(split[1]), parseInt(split[2]), this));
+                            animals.add(new Antylopa(parseInt(split[2]), parseInt(split[1]), this));
                             break;
                         }
                         case "CyberOwca": {
-                            animals.add(new CyberOwca(parseInt(split[1]), parseInt(split[2]), this));
+                            animals.add(new CyberOwca(parseInt(split[2]), parseInt(split[1]), this));
                             break;
                         }
                         case "Czlowiek": {
-                            animals.add(new Czlowiek(parseInt(split[1]), parseInt(split[2]), this));
+                            animals.add(new Czlowiek(parseInt(split[2]), parseInt(split[1]), this));
                             this.czlowiek = (Czlowiek) animals.get(i);
                             break;
                         }
@@ -303,23 +302,23 @@ public class World {
 
                     switch (split[0]) {
                         case "Trawa": {
-                            plants.add(new Trawa(parseInt(split[1]), parseInt(split[2]), this));
+                            plants.add(new Trawa(parseInt(split[2]), parseInt(split[1]), this));
                             break;
                         }
                         case "Mlecz": {
-                            plants.add(new Mlecz(parseInt(split[1]), parseInt(split[2]), this));
+                            plants.add(new Mlecz(parseInt(split[2]), parseInt(split[1]), this));
                             break;
                         }
                         case "Guarana": {
-                            plants.add(new Guarana(parseInt(split[1]), parseInt(split[2]), this));
+                            plants.add(new Guarana(parseInt(split[2]), parseInt(split[1]), this));
                             break;
                         }
                         case "WilczeJagody": {
-                            plants.add(new WilczeJagody(parseInt(split[1]), parseInt(split[2]), this));
+                            plants.add(new WilczeJagody(parseInt(split[2]), parseInt(split[1]), this));
                             break;
                         }
                         case "BarszczSosnowskiego": {
-                            plants.add(new BarszczSosnowskiego(parseInt(split[1]), parseInt(split[2]), this));
+                            plants.add(new BarszczSosnowskiego(parseInt(split[2]), parseInt(split[1]), this));
                             break;
                         }
                     }
@@ -329,7 +328,6 @@ public class World {
         } catch (FileNotFoundException e) {
 
         }
-
             initField();
 
             sortPlants();

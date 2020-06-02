@@ -1,7 +1,13 @@
 import World.*;
 
+import java.util.Scanner;
+
 public class main {
     public static void main(String[] args){
-        World world = new World(20, 20);
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Podaj rozmiary planszy: ");
+        int X = scanner.nextInt();
+        int Y = scanner.nextInt();
+        World world = new World(Y, X);
     }
 }
