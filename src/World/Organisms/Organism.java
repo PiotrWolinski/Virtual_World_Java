@@ -85,8 +85,6 @@ public abstract class Organism {
 
     abstract public void Collision(Organism attacker);
 
-    abstract public void Draw();
-
     @Override
     public String toString() { return this.getClass().getSimpleName(); }
 

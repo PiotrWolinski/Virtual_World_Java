@@ -86,8 +86,4 @@ public abstract class Plant extends Organism {
             this.world.getCommentator().commentKill( this, attacker);
         }
     }
-
-    public void Draw() {
-
-    }
 }

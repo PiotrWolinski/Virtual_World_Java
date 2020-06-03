@@ -98,8 +98,4 @@ public class Animal extends Organism {
             this.world.getCommentator().commentUnsuccPropagation(this);
         }
     }
-
-    public void Draw() {
-
-    }
 }

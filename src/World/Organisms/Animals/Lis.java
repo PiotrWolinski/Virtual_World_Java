@@ -66,8 +66,4 @@ public class Lis extends Animal {
             world.returnOrganismFrom(this.Y, this.X).Collision(this);
         }
     }
-
-    public void Draw() {
-
-    }
 }

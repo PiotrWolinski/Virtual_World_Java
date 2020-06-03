@@ -58,5 +58,4 @@ public class CyberOwca extends Owca{
 
         return closestBarszcz;
     }
-
 }

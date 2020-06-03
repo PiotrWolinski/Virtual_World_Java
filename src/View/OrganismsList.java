@@ -25,6 +25,7 @@ public class OrganismsList {
                 this.list[i].setBackground(Colors.values()[i].getColor());
                 this.list[i].setFocusPainted(false);
                 this.list[i].setBorderPainted(false);
+                if (names[i].equals("CyberOwca")) this.list[i].setForeground(Color.white);
                 list.add(this.list[i]);
             }
 
